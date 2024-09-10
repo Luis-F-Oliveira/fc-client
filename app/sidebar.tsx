@@ -79,8 +79,8 @@ export const Sidebar = () => {
         </Command>
       </CardContent>
       <CardFooter className='w-full flex justify-center items-center gap-2 absolute bottom-0'>
-        <Button variant='destructive'>
-          Em Obras
+        <Button>
+          Versão: 1.0
         </Button>
         <ModeToggle />
       </CardFooter>

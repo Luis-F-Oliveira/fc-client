@@ -8,10 +8,12 @@ import type { KeyedMutator } from "swr"
 import {
   ColumnDef,
   ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -60,6 +62,7 @@ export function DataTable<TData extends IData, TValue>({
   const [rowSelection, setRowSelection] = React.useState({})
   const [rowSelectionId, setRowSelectionId] = React.useState<number[]>([])
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [sorting, setSorting] = React.useState<SortingState>([])
 
   const handleRefresh = () => mutate()
 
@@ -78,8 +81,11 @@ export function DataTable<TData extends IData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     state: {
       columnFilters,
+      sorting,
       rowSelection,
     }
   })
