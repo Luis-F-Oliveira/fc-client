@@ -16,7 +16,7 @@ import { useToast } from '@/hooks/use-toast'
 
 export const Toggles = () => {
   const [isActive, setIsActive] = React.useState(false)
-  const { active, setterData, storeData } = useScrapping()
+  const { active, setterData, storeData, isSubmitting } = useScrapping()
   const { toast } = useToast()
 
   const handleInit = async () => {
@@ -70,6 +70,7 @@ export const Toggles = () => {
             variant='outline'
             size='icon'
             type='button'
+            isSubmitting={isSubmitting}
             onClick={storeData}
           >
             <HardDriveDownload />

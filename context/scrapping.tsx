@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast"
 interface ContextProps {
   data: IData[]
   date: Date
+  isSubmitting: boolean
   active: () => void
   setterData: (data: IData[]) => void
   storeData: () => void
@@ -60,6 +61,7 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
   const [data, setData] = React.useState<IData[]>([])
   const [date, setDate] = React.useState(new Date())
   const [isActive, setIsActive] = React.useState(false)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
   const { refresh } = useRouter()
   const { toast } = useToast()
 
@@ -87,9 +89,11 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
   }
 
   const storeData = () => {
+    setIsSubmitting(true)
     api.post('/api/collected_data', data)
       .then((res) => {
         const { message } = res.data
+        setIsSubmitting(false)
         toast({
           title: "Dados Salvos",
           description: message
@@ -97,6 +101,7 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
       })
       .catch((err) => {
         const { message } = err.response.data
+        setIsSubmitting(false)
         toast({
           title: "Erro ao Salvar Dados",
           description: message,
@@ -106,7 +111,7 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ data, date, active, setterData, storeData }}>
+    <Context.Provider value={{ data, date, isSubmitting, active, setterData, storeData }}>
       {children}
       {isActive && <Span />}
     </Context.Provider>

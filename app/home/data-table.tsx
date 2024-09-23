@@ -43,8 +43,9 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 
-import { MailPlus, RefreshCcw } from "lucide-react"
+import { MailPlus, MailQuestion, RefreshCcw } from "lucide-react"
 import axios from "@/lib/axios"
+import { DateSend } from "./date-send"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -68,7 +69,7 @@ export function DataTable<TData extends IData, TValue>({
 
   const handleSendEmail = () => {
     setIsSubmitting(true)
-    axios.post('/api/send_emails', rowSelectionId)
+    axios.post('/api/send_emails_by_ids', rowSelectionId)
       .then(() => setIsSubmitting(false))
       .catch(() => setIsSubmitting(false))
   }
@@ -127,7 +128,7 @@ export function DataTable<TData extends IData, TValue>({
             }
           />
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -153,13 +154,14 @@ export function DataTable<TData extends IData, TValue>({
                   isSubmitting={isSubmitting}
                   onClick={handleSendEmail}
                 >
-                  <MailPlus />
+                  <MailQuestion />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Enviar Email</p>
+                <p>Enviar Email Selecionados</p>
               </TooltipContent>
             </Tooltip>
+            <DateSend />
           </TooltipProvider>
         </div>
       </div>
