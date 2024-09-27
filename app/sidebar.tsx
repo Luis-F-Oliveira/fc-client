@@ -48,6 +48,9 @@ export const Sidebar = () => {
               <Link href='/home'>
                 <CommandItem className='cursor-pointer'>Principal</CommandItem>
               </Link>
+              <Link href='/report'>
+                <CommandItem className='cursor-pointer'>Relatório</CommandItem>
+              </Link>
               <Link href='/data'>
                 <CommandItem className='cursor-pointer'>Servidores</CommandItem>
               </Link>
@@ -71,6 +74,13 @@ export const Sidebar = () => {
                         </DropdownMenuItem>
                       </Link>
                     </DropdownMenuGroup>
+                    <DropdownMenuGroup>
+                      <Link href='/scrapping/name-date-collection'>
+                        <DropdownMenuItem className='cursor-pointer'>
+                          Coleta Por Nome e Data
+                        </DropdownMenuItem>
+                      </Link>
+                    </DropdownMenuGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </CommandItem>
@@ -80,7 +90,7 @@ export const Sidebar = () => {
       </CardContent>
       <CardFooter className='w-full flex justify-center items-center gap-2 absolute bottom-0'>
         <Button>
-          Versão: 1.0
+          Versão: 2.0
         </Button>
         <ModeToggle />
       </CardFooter>

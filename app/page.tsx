@@ -62,81 +62,21 @@ export default function Page() {
         <h2 className='text-xl' id='about'>
           Sobre o Projeto
         </h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
       </article>
       <article className='space-y-2 text-justify mt-5'>
         <h2 className='text-xl' id='install'>
           Instalação
         </h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
       </article>
       <article className='space-y-2 text-justify mt-5'>
         <h2 className='text-xl' id='operation'>
           Funcionamento
         </h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
       </article>
       <article className='space-y-2 text-justify mt-5'>
         <h2 className='text-xl' id='examples'>
           Exemplos
         </h2>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium vitae deserunt voluptatum numquam aut reiciendis, magni qui consectetur fugiat provident quasi ratione cumque sint ipsa expedita illum maxime id eveniet?
-          Numquam esse minus quos atque qui. Corporis architecto velit hic dolor recusandae quas enim error quod totam. Sed, aperiam quibusdam repellendus facilis molestias, voluptatem, earum harum quaerat cupiditate delectus excepturi.
-          Culpa tempore in, unde velit voluptatibus fuga quidem, magnam tempora saepe, quam nihil expedita ad. Deleniti suscipit ullam amet quas sed, nostrum excepturi quidem magni eveniet non soluta unde dolor.
-        </p>
       </article>
     </div>
   )

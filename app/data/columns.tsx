@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge"
 import React from "react"
 import { EditDialog } from "./edit-dialog"
 import { DeleteDialog } from "./delete-dialog"
+import { useReactTable, getFilteredRowModel } from '@tanstack/react-table'
 
 const ActionsCell: React.FC<CellContext<IServant, unknown>> = ({ row }) => {
   const [isEdit, setIsEdit] = React.useState(false)
@@ -81,21 +82,31 @@ export const columns: ColumnDef<IServant>[] = [
   },
   {
     accessorKey: "active",
-    header: "Notificações",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Notificações
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const servant = row.original
       return (
         <div>
           {servant.active ? (
-            <Badge>
+            <Badge className="cursor-default">
               Ativado
             </Badge>
           ) : (
-            <Badge variant='destructive'>
+            <Badge className="cursor-default" variant='destructive'>
               Desativado
             </Badge>
           )}
-        </div>)
+        </div>
+      )
     }
   }
 ]

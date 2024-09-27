@@ -16,3 +16,11 @@ export interface IData {
   updated_at: string
   servants: IServant[]
 }
+
+export interface IReport {
+  id: number
+  data_id: number
+  servant_id: number
+  data: IData
+  servant: IServant
+}

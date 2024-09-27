@@ -19,6 +19,18 @@ html {
   border-radius: 20px;
 }
 
+.rdp [aria-hidden="true"] {
+  @apply hidden;
+}
+
+.rdp-vhidden {
+  @apply hidden;
+}
+
+select::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

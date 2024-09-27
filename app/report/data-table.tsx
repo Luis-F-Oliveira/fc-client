@@ -1,19 +1,19 @@
-"use client"
+'use client'
 
 import React from "react"
 
-import type { IServant } from "@/types/data"
+import type { IReport } from "@/types/data"
 import type { KeyedMutator } from "swr"
 
 import {
   ColumnDef,
   ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -35,24 +35,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 import {
   Tooltip,
   TooltipProvider,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-
-import { Export } from "./export"
-import { Import } from "./import"
-import { Create } from "./create"
-
 import { RefreshCcw } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  mutate: KeyedMutator<IServant[]>
+  mutate: KeyedMutator<IReport[]>
 }
 
 export function DataTable<TData, TValue>({
@@ -60,13 +54,11 @@ export function DataTable<TData, TValue>({
   data,
   mutate
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [selectedOption, setSelectedOption] = React.useState('name')
+  const [selectedOption, setSelectedOption] = React.useState('servant_name')
+  const [sorting, setSorting] = React.useState<SortingState>([])
 
-  const handleRefresh = () => {
-    mutate()
-  }
+  const handleRefresh = () => mutate()
 
   const table = useReactTable({
     data,
@@ -80,7 +72,7 @@ export function DataTable<TData, TValue>({
     state: {
       columnFilters,
       sorting,
-    },
+    }
   })
 
   return (
@@ -97,10 +89,10 @@ export function DataTable<TData, TValue>({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="enrollment">Matricula</SelectItem>
-              <SelectItem value="contract">Contrato</SelectItem>
-              <SelectItem value="name">Nome</SelectItem>
-              <SelectItem value="email">E-mail</SelectItem>
+              <SelectItem value="servant_name">Nome</SelectItem>
+              <SelectItem value="servant_email">E-mail</SelectItem>
+              <SelectItem value="created_at">Data Envio</SelectItem>
+              <SelectItem value="data_created_at">Data Portaria</SelectItem>
             </SelectContent>
           </Select>
           <Input
@@ -112,7 +104,7 @@ export function DataTable<TData, TValue>({
             }
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -129,9 +121,6 @@ export function DataTable<TData, TValue>({
                 <p>Atualizar</p>
               </TooltipContent>
             </Tooltip>
-            <Export />
-            <Import />
-            <Create />
           </TooltipProvider>
         </div>
       </div>
@@ -179,23 +168,29 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Anterior
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Próximo
-        </Button>
+      <div className="flex items-center">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} de{" "}
+          {table.getFilteredRowModel().rows.length} linha(s) selecionadas.
+        </div>
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Anterior
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Próximo
+          </Button>
+        </div>
       </div>
     </div>
   )
