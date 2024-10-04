@@ -10,6 +10,7 @@ import { z } from "zod"
 import { cn } from "@/lib/utils"
 import { Calendar } from "@/components/ui/calendar"
 import {
+  TooltipProvider,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -37,9 +38,9 @@ import {
 } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import anext from "@/lib/anext"
 
 const schema = z.object({
   name: z.string({
@@ -58,26 +59,20 @@ interface ModalProps {
 }
 
 const Forms = () => {
-  const { toast } = useToast()
-
   const form = useForm<IForm>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      date: new Date()
-    }
   })
 
   const { isSubmitting } = form.formState
 
   const onSubmit = async (data: IForm) => {
-    const date = data.date.toLocaleDateString()
-    console.log(date)
+    await anext.post('/api/name-date-collection', data)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        <FormField 
+        <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
@@ -115,7 +110,7 @@ const Forms = () => {
                       {field.value ? (
                         format(new Date(field.value), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Escolha uma data</span>
                       )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -159,7 +154,7 @@ const Forms = () => {
 const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent>
+      <DialogContent className="w-1/3">
         <DialogHeader>
           <DialogTitle className="uppercase">Buscar dados por nome</DialogTitle>
         </DialogHeader>
@@ -169,28 +164,30 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen }) => {
   )
 }
 
-export const FormDialog = () => {
+export const DNForm = () => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const handleOpen = () => setIsOpen(true)
 
   return (
     <>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant='outline'
-            size='icon'
-            type='button'
-            onClick={handleOpen}
-          >
-            <Search />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Iniciar Busca</p>
-        </TooltipContent>
-      </Tooltip>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant='outline'
+              size='icon'
+              type='button'
+              onClick={handleOpen}
+            >
+              <Search />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Iniciar Busca</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   )

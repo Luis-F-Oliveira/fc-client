@@ -8,16 +8,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Button } from '@/components/ui/button'
-import { HardDriveDownload, Play } from 'lucide-react'
-import { useScrapping } from '@/context/scrapping'
-import api from '@/lib/axios'
+import { Play } from 'lucide-react'
 import anext from '@/lib/anext'
 import { useToast } from '@/hooks/use-toast'
-import { FormDialog } from './form'
+import api from '@/lib/axios'
+import { useScrapping } from '@/context/scrapping'
 
-export const Toggles = () => {
-  const [isActive, setIsActive] = React.useState(false)
-  const { active, setterData, storeData, isSubmitting } = useScrapping()
+export const Start = () => {
+  const [ isActive, setIsActive ] = React.useState(false)
+  const { active, setterData } = useScrapping()
   const { toast } = useToast()
 
   const handleInit = async () => {
@@ -49,24 +48,22 @@ export const Toggles = () => {
 
   return (
     <TooltipProvider>
-      <FormDialog />
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
             variant='outline'
             size='icon'
             type='button'
-            isSubmitting={isSubmitting}
-            onClick={storeData}
+            onClick={handleInit}
+            isSubmitting={isActive}
           >
-            <HardDriveDownload />
+            <Play />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Salvar Dados</p>
+          <p>Iniciar Busca</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-
   )
 }

@@ -68,14 +68,14 @@ export const Sidebar = () => {
                     <DropdownMenuLabel>Coletar Dados</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <Link href='/scrapping/current-day-collection'>
+                      <Link href='/scrapping/current'>
                         <DropdownMenuItem className='cursor-pointer'>
                           Coleta Do Dia Atual
                         </DropdownMenuItem>
                       </Link>
                     </DropdownMenuGroup>
                     <DropdownMenuGroup>
-                      <Link href='/scrapping/name-date-collection'>
+                      <Link href='/scrapping/name-date'>
                         <DropdownMenuItem className='cursor-pointer'>
                           Coleta Por Nome e Data
                         </DropdownMenuItem>
@@ -90,7 +90,7 @@ export const Sidebar = () => {
       </CardContent>
       <CardFooter className='w-full flex justify-center items-center gap-2 absolute bottom-0'>
         <Button>
-          Versão: 2.0
+          Versão: 3.0
         </Button>
         <ModeToggle />
       </CardFooter>
