@@ -62,7 +62,8 @@ const schema = z.object({
 type IForm = z.infer<typeof schema>
 
 interface Props {
-  id: number
+  id: number | undefined
+  token: string | undefined
 }
 
 const Loading = () => {
@@ -95,11 +96,11 @@ const Loading = () => {
   )
 }
 
-export const Edit: React.FC<Props> = ({ id }) => {
+export const Edit: React.FC<Props> = ({ id, token }) => {
   const { data: data } = useSWR<IServant>(
     `/api/servants/${id}`, async () =>
     await api
-      .get(`/api/servants/${id}`)
+      .get(`/api/servants/${id}`, { headers: { 'Authorization': 'Bearer ' + token }})
       .then(res => res.data)
   )
 
@@ -119,7 +120,11 @@ export const Edit: React.FC<Props> = ({ id }) => {
   const { isSubmitting } = form.formState
 
   const onSubmit = async (values: IForm) => {
-    await api.put(`/api/servants/${id}`, values)
+    await api.put(`/api/servants/${id}`, values, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
       .then((res) => {
         const { message } = res.data
 

@@ -14,17 +14,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import React from "react"
-import { EditDialog } from "./edit-dialog"
-import { DeleteDialog } from "./delete-dialog"
-import { useReactTable, getFilteredRowModel } from '@tanstack/react-table'
+import { useData } from "@/context/data-context"
 
 const ActionsCell: React.FC<CellContext<IServant, unknown>> = ({ row }) => {
-  const [isEdit, setIsEdit] = React.useState(false)
-  const [isDelete, setIsDelete] = React.useState(false)
+  const { setIsOpen, setId } = useData()
   const servant = row.original
 
-  const handleEdit = () => setIsEdit(true)
-  const handleDelete = () => setIsDelete(true)
+  const handleEdit = () => {
+    setId(servant.id)
+    setIsOpen(true)
+  }
 
   return (
     <>
@@ -40,21 +39,8 @@ const ActionsCell: React.FC<CellContext<IServant, unknown>> = ({ row }) => {
           <DropdownMenuItem onClick={handleEdit} className="cursor-pointer">
             Editar
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleDelete} className="cursor-pointer">
-            Apagar
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <EditDialog
-        isOpen={isEdit}
-        setIsOpen={setIsEdit}
-        id={servant.id}
-      />
-      <DeleteDialog
-        isOpen={isDelete}
-        setIsOpen={setIsDelete}
-        id={servant.id}
-      />
     </>
   )
 }

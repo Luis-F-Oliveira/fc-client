@@ -40,16 +40,33 @@ export async function POST(req: NextRequest) {
 
   const browser = await chromium.launch({ headless: false })
   const page = await browser.newPage()
-  
-  dates.forEach(async (element) => {
+
+  for (const element of dates) {
+    console.log('Rodando: ' + element)
+    let dialogAppeared = false
+    page.on('dialog', async dialog => { 
+      dialogAppeared = true
+    })
+
     await page.waitForTimeout(5000)
     await page.goto('https://www.iomat.mt.gov.br/')
-
+    
     const input = page.locator('xpath=//*[@id="dataEdicaoPortal"]')
-    await input.fill(element)
+    await input.click()
+    await input.press('Control+A')
+    await input.press('Backspace')
+    await input.type(element, { delay: 100 })
     await page.locator('xpath=//*[@id="sbmt1"]').click()
 
-  })
+    if (dialogAppeared) {
+      console.log(`elemento pulado: ${element}`)
+      continue
+    } else {
+      console.log('continuando função')
+    }
+
+    // await page.waitForTimeout(5000)
+  }
 
   await browser.close()
 

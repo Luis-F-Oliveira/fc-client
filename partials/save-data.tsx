@@ -10,10 +10,14 @@ import { Button } from '@/components/ui/button'
 import { HardDriveDownload } from 'lucide-react'
 import { useScrapping } from '@/context/scrapping'
 
-export const SaveData = () => {
+interface Props {
+  token: string | undefined
+}
+
+export const SaveData: React.FC<Props> = ({ token }) => {
   const { storeData, isSubmitting } = useScrapping()
 
-  const handleStoreData = () => storeData()
+  const handleStoreData = () => storeData(token)
 
   return (
     <TooltipProvider>

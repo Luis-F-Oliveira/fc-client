@@ -2,9 +2,6 @@
 
 import React from "react"
 
-import type { IServant } from "@/types/data"
-import type { KeyedMutator } from "swr"
-
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -37,36 +34,27 @@ import {
 } from "@/components/ui/select"
 
 import {
-  Tooltip,
   TooltipProvider,
-  TooltipContent,
-  TooltipTrigger
 } from '@/components/ui/tooltip'
 
 import { Export } from "./export"
 import { Import } from "./import"
 import { Create } from "./create"
 
-import { RefreshCcw } from "lucide-react"
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  mutate: KeyedMutator<IServant[]>
+  token: string | undefined
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  mutate
+  token
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [selectedOption, setSelectedOption] = React.useState('name')
-
-  const handleRefresh = () => {
-    mutate()
-  }
 
   const table = useReactTable({
     data,
@@ -114,24 +102,9 @@ export function DataTable<TData, TValue>({
         </div>
         <div className="flex items-center gap-2">
           <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  type='button'
-                  size='icon'
-                  variant='outline'
-                  onClick={handleRefresh}
-                >
-                  <RefreshCcw />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Atualizar</p>
-              </TooltipContent>
-            </Tooltip>
             <Export />
-            <Import />
-            <Create />
+            <Import token={token} />
+            <Create token={token} />
           </TooltipProvider>
         </div>
       </div>

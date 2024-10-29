@@ -43,20 +43,18 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 
-import { MailPlus, MailQuestion, RefreshCcw } from "lucide-react"
+import { MailQuestion, RefreshCcw } from "lucide-react"
 import axios from "@/lib/axios"
 import { DateSend } from "./date-send"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  mutate: KeyedMutator<IData[]>
 }
 
 export function DataTable<TData extends IData, TValue>({
   columns,
-  data,
-  mutate
+  data
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [selectedOption, setSelectedOption] = React.useState('servant_name')
@@ -64,8 +62,6 @@ export function DataTable<TData extends IData, TValue>({
   const [rowSelectionId, setRowSelectionId] = React.useState<number[]>([])
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [sorting, setSorting] = React.useState<SortingState>([])
-
-  const handleRefresh = () => mutate()
 
   const handleSendEmail = () => {
     setIsSubmitting(true)
@@ -130,21 +126,6 @@ export function DataTable<TData extends IData, TValue>({
         </div>
         <div className="flex items-center gap-1">
           <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  type='button'
-                  size='icon'
-                  variant='outline'
-                  onClick={handleRefresh}
-                >
-                  <RefreshCcw />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Atualizar</p>
-              </TooltipContent>
-            </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button

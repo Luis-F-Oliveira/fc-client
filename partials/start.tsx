@@ -14,7 +14,11 @@ import { useToast } from '@/hooks/use-toast'
 import api from '@/lib/axios'
 import { useScrapping } from '@/context/scrapping'
 
-export const Start = () => {
+interface Props {
+  token: string | undefined
+}
+
+export const Start: React.FC<Props> = ({ token }) => {
   const [ isActive, setIsActive ] = React.useState(false)
   const { active, setterData } = useScrapping()
   const { toast } = useToast()
@@ -23,7 +27,9 @@ export const Start = () => {
     setIsActive(true)
 
     try {
-      const response = await api.get('/api/servants')
+      const response = await api.get('/api/servants', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       const { data } = response
 
       setIsActive(false)

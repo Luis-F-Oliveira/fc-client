@@ -1,18 +1,32 @@
-'use client'
-
-import axios from "@/lib/axios"
-import useSWR from "swr"
 import type { IReport } from "@/types/data"
 import { DataTable } from "./data-table"
 import { columns } from "./columns"
+import { cookies } from "next/headers"
+import api from "@/lib/axios"
+import { Forbidden } from "@/partials/forbidden"
 
-export default function Page() {
-  const { data: data = [], mutate } = useSWR<IReport[]>(
-    '/api/reports', async () =>
-    await axios
-      .get('/api/reports')
-      .then(res => res.data)
-  )
+async function getData(): Promise<IReport[] | number> {
+  const token = cookies().get('jwt')?.value
 
-  return <DataTable mutate={mutate} data={data} columns={columns}/>
+  try {
+    const res = await api.get('/api/reports', { headers: { Authorization: `Bearer ${token}` }})
+    return res.data
+  } catch (err: any) {
+    const status = err.response?.status
+    return status
+  }
+}
+
+export default async function Page() {
+  const data = await getData()
+
+  if (typeof data === 'number' && data === 403) {
+    return <Forbidden />
+  }
+
+  if (Array.isArray(data)) {
+    return <DataTable data={data} columns={columns}/>
+  }
+
+  return <p>Carregando...</p>
 }

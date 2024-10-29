@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React from 'react'
 import {
@@ -8,21 +8,22 @@ import {
   DialogTitle
 } from "@/components/ui/dialog"
 import { Edit } from './edit'
+import { useData } from '@/context/data-context'
 
 interface Props {
-  isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-  id: number
+  token: string | undefined
 }
 
-export const EditDialog: React.FC<Props> = ({ isOpen, setIsOpen, id }) => {
+export const EditDialog: React.FC<Props> = ({ token }) => {
+  const { isOpen, setIsOpen, id } = useData()
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Atualizar</DialogTitle>
         </DialogHeader>
-        <Edit id={id} />
+        <Edit id={id} token={token} />
       </DialogContent>
     </Dialog>
   )

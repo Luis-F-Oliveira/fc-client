@@ -19,7 +19,7 @@ interface ContextProps {
   isSubmitting: boolean
   active: () => void
   setterData: (data: IData[]) => void
-  storeData: () => void
+  storeData: (token: string | undefined) => void
 }
 
 interface ProviderProps {
@@ -88,9 +88,13 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
     refresh()
   }
 
-  const storeData = () => {
+  const storeData = (token: string | undefined) => {
     setIsSubmitting(true)
-    api.post('/api/collected_data', data)
+    api.post('/api/collected_data', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then((res) => {
         const { message } = res.data
         setIsSubmitting(false)
@@ -101,12 +105,25 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
       })
       .catch((err) => {
         const { message } = err.response.data
+        const { status } = err.response
         setIsSubmitting(false)
+
+        if (status === 403) {
+          toast({
+            title: "Aviso",
+            description: "Você não tem permissão para salvar dados.",
+            variant: 'destructive'
+          })
+          return
+        }
+
         toast({
           title: "Erro ao Salvar Dados",
           description: message,
           variant: 'destructive'
         })
+
+        console.error(message)
       })
   }
 

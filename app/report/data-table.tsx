@@ -35,30 +35,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/tooltip'
-import { RefreshCcw } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  mutate: KeyedMutator<IReport[]>
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
-  mutate
+  data
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [selectedOption, setSelectedOption] = React.useState('servant_name')
   const [sorting, setSorting] = React.useState<SortingState>([])
-
-  const handleRefresh = () => mutate()
 
   const table = useReactTable({
     data,
@@ -103,25 +92,6 @@ export function DataTable<TData, TValue>({
               table.getColumn(selectedOption)?.setFilterValue(event.target.value)
             }
           />
-        </div>
-        <div className="flex items-center gap-1">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  type='button'
-                  size='icon'
-                  variant='outline'
-                  onClick={handleRefresh}
-                >
-                  <RefreshCcw />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Atualizar</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
         </div>
       </div>
       <div className="rounded-md border">
