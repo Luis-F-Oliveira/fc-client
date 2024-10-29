@@ -26,10 +26,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ModeToggle } from '@/components/ui/toggle-theme'
+import { logout } from '@/lib/auth'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export const Sidebar = () => {
+  const { refresh } = useRouter()
+  const handleLogout = async () => {
+    const success = await logout()
+
+    if (success) {
+      refresh()
+    }
+  }
+
   return (
     <Card className='rounded-none relative'>
       <CardHeader className='text-center'>
@@ -41,59 +52,43 @@ export const Sidebar = () => {
       </CardHeader>
       <CardContent>
         <Command>
-          <CommandInput placeholder="Procurar..." />
+          <CommandInput placeholder="CTRL + K..." />
           <CommandList>
             <CommandEmpty>Nenhum resultado.</CommandEmpty>
-            <CommandGroup heading="Páginas">
+            <CommandGroup heading="Páginas Públicas">
               <Link href='/home'>
                 <CommandItem className='cursor-pointer'>Principal</CommandItem>
               </Link>
               <Link href='/report'>
                 <CommandItem className='cursor-pointer'>Relatório</CommandItem>
               </Link>
+            </CommandGroup>
+            <CommandGroup heading="Páginas Admin">
               <Link href='/data'>
                 <CommandItem className='cursor-pointer'>Servidores</CommandItem>
               </Link>
-              <CommandItem className='cursor-pointer'>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      className='p-0 h-6'
-                      variant="ghost"
-                    >
-                      Buscar Dados
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel>Coletar Dados</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <Link href='/scrapping/current'>
-                        <DropdownMenuItem className='cursor-pointer'>
-                          Coleta Do Dia Atual
-                        </DropdownMenuItem>
-                      </Link>
-                    </DropdownMenuGroup>
-                    <DropdownMenuGroup>
-                      <Link href='/scrapping/name-date'>
-                        <DropdownMenuItem className='cursor-pointer'>
-                          Coleta Por Nome e Data
-                        </DropdownMenuItem>
-                      </Link>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </CommandItem>
+              <Link href='/users'>
+                <CommandItem className='cursor-pointer'>Usuários</CommandItem>
+              </Link>
+            </CommandGroup>
+            <CommandGroup heading="Páginas Coleta">
+              <Link href='/scrapping/current'>
+                <CommandItem className='cursor-pointer'>Dia Atual</CommandItem>
+              </Link>
+              <CommandItem disabled className='cursor-pointer'>Nome e Data</CommandItem>
             </CommandGroup>
           </CommandList>
         </Command>
       </CardContent>
       <CardFooter className='w-full flex justify-center items-center gap-2 absolute bottom-0'>
-        <Button>
-          Versão: 3.0
+        <Button
+          variant='destructive'
+          onClick={handleLogout}
+        >
+          Sair
         </Button>
         <ModeToggle />
       </CardFooter>
-    </Card>
+    </Card >
   )
 }
