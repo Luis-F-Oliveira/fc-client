@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/provider/theme-provider"
 import { Metadata } from "next"
-import { Sidebar } from "./sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/partials/app-sidebar"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body
         className={cn(
-          "w-screen h-screen bg-background font-sans antialiased overflow-x-hidden transition-colors flex gap-3",
+          "w-screen h-screen bg-background font-sans overflow-x-hidden antialiased transition-colors",
           fontSans.variable,
         )}
       >
@@ -35,10 +36,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Sidebar />
-          <main className="overflow-y-auto container mx-auto px-2">
-            {children}
-          </main>
+          <SidebarProvider defaultOpen={false}>
+            <AppSidebar />
+            <main className="mx-auto container pt-1">
+              <SidebarTrigger />
+              {children}
+            </main>
+          </SidebarProvider>
           <Toaster />
         </ThemeProvider>
         <Toaster />

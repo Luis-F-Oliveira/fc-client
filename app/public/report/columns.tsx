@@ -1,6 +1,6 @@
 "use client"
 
-import type { IReport } from '@/types/data'
+import type { IReport } from '@/@types/data'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, SquareArrowOutUpRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'

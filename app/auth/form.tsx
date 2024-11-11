@@ -23,7 +23,7 @@ export const Forms = () => {
       toast({
         title: "Login efetuado com sucesso!"
       })
-      push('/home')
+      push('/public/home')
     } else {
       toast({
         title: "Falha ao efetuar login",

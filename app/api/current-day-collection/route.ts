@@ -1,4 +1,4 @@
-import type { IServant } from "@/types/data"
+import type { IServant } from "@/@types/data"
 import type { NextRequest } from "next/server"
 import { chromium } from 'playwright'
 

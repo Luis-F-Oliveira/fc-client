@@ -72,7 +72,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="mt-5">
       <div className="flex justify-between items-center py-4">
         <div className="w-1/3 grid grid-cols-3 gap-1 items-center">
           <Select

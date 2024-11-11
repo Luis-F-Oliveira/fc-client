@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form'
 import { DialogClose, DialogFooter } from '@/components/ui/dialog'
 import { Skeleton } from "@/components/ui/skeleton"
-import { IServant } from '@/types/data'
+import { IServant } from '@/@types/data'
 import useSWR from 'swr'
 import api from '@/lib/axios'
 import { useToast } from '@/hooks/use-toast'

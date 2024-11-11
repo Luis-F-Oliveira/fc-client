@@ -1,6 +1,6 @@
 "use client"
 
-import type { IServant } from "@/types/data"
+import type { IServant } from "@/@types/data"
 import { CellContext, ColumnDef } from '@tanstack/react-table'
 
 import { MoreHorizontal } from 'lucide-react'

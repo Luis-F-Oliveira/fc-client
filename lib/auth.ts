@@ -12,9 +12,14 @@ export const login = async (values: IValue) => {
 
   await api.post('/api/login', values)
     .then((res) => {
-      const { token } = res.data
+      const { token, roles } = res.data
       cookies().set('jwt', token, {
         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+      })
+      roles.forEach((role: string) => {
+        cookies().set(role, '', {
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        })
       })
       success = true
     })

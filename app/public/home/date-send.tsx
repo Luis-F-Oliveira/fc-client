@@ -53,6 +53,7 @@ type IForm = z.infer<typeof schema>
 interface Props {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  token: string | undefined
 }
 
 interface IDate {
@@ -65,13 +66,24 @@ const formatDate = (date: string): string => {
   return formattedDate
 }
 
-const Modal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
+async function getData(token: string | undefined): Promise<IDate[]> {
+  try {
+    const response = await api.get('/api/show_date', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    return response.data
+  } catch (err: any) {
+    return []
+  }
+}
+
+const Modal: React.FC<Props> = ({ isOpen, setIsOpen, token }) => {
   const [dates, setDates] = React.useState<Array<{ label: string; value: string }>>([])
   const { data: data = [], isLoading } = useSWR<IDate[]>(
     '/api/show_date', async () =>
-    await api
-      .get('/api/show_date')
-      .then(res => res.data)
+    await getData(token)
   )
 
   React.useEffect(() => {
@@ -195,7 +207,11 @@ const Modal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   )
 }
 
-export const DateSend = () => {
+export const DateSend = ({ 
+  token 
+} : { 
+  token: string | undefined
+}) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const handleOpen = () => setIsOpen(true)
@@ -217,7 +233,7 @@ export const DateSend = () => {
           <p>Enviar Email Por Data</p>
         </TooltipContent>
       </Tooltip>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal token={token} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   )
 }

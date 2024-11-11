@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react"
-import type { IData } from "@/types/data"
+import type { IData } from "@/@types/data"
 import { TypingEffect } from '@/components/ui/typing'
 import {
   Card,

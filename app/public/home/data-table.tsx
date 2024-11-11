@@ -2,8 +2,7 @@
 
 import React from "react"
 
-import type { IData } from "@/types/data"
-import type { KeyedMutator } from "swr"
+import type { IData } from "@/@types/data"
 
 import {
   ColumnDef,
@@ -43,18 +42,20 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 
-import { MailQuestion, RefreshCcw } from "lucide-react"
+import { MailQuestion } from "lucide-react"
 import axios from "@/lib/axios"
 import { DateSend } from "./date-send"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  token: string | undefined
 }
 
 export function DataTable<TData extends IData, TValue>({
   columns,
-  data
+  data,
+  token
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [selectedOption, setSelectedOption] = React.useState('servant_name')
@@ -65,7 +66,11 @@ export function DataTable<TData extends IData, TValue>({
 
   const handleSendEmail = () => {
     setIsSubmitting(true)
-    axios.post('/api/send_emails_by_ids', rowSelectionId)
+    axios.post('/api/send_emails_by_ids', rowSelectionId, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(() => setIsSubmitting(false))
       .catch(() => setIsSubmitting(false))
   }
@@ -96,7 +101,7 @@ export function DataTable<TData extends IData, TValue>({
   }, [rowSelection])
 
   return (
-    <div>
+    <div className="mt-5">
       <div className="flex justify-between items-center py-4">
         <div className="w-1/3 grid grid-cols-3 gap-1 items-center">
           <Select
@@ -142,7 +147,7 @@ export function DataTable<TData extends IData, TValue>({
                 <p>Enviar Email Selecionados</p>
               </TooltipContent>
             </Tooltip>
-            <DateSend />
+            <DateSend token={token} />
           </TooltipProvider>
         </div>
       </div>

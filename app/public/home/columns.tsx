@@ -1,6 +1,6 @@
 "use client"
 
-import type { IData } from '@/types/data'
+import type { IData } from '@/@types/data'
 import { ColumnDef } from '@tanstack/react-table'
 import { Checkbox } from "@/components/ui/checkbox"
 import Link from 'next/link'
