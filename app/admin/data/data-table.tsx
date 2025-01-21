@@ -44,13 +44,11 @@ import { Create } from "./create"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  token: string | undefined
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
-  token
+  data
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -103,8 +101,8 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center gap-2">
           <TooltipProvider>
             <Export />
-            <Import token={token} />
-            <Create token={token} />
+            <Import />
+            <Create />
           </TooltipProvider>
         </div>
       </div>

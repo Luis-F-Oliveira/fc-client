@@ -49,11 +49,7 @@ const schema = z.object({
 
 type IForm = z.infer<typeof schema>
 
-interface Props {
-  token: string | undefined
-}
-
-const Forms: React.FC<Props> = ({ token }) => {
+const Forms = () => {
   const { toast } = useToast()
   const form = useForm<IForm>({
     resolver: zodResolver(schema)
@@ -64,8 +60,7 @@ const Forms: React.FC<Props> = ({ token }) => {
   const onSubmit = async (values: IForm) => {
     await api.post('/api/servants/import', values, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + token
+        'Content-Type': 'multipart/form-data'
       }
     })
       .then((res) => {
@@ -156,11 +151,11 @@ const Forms: React.FC<Props> = ({ token }) => {
   )
 }
 
-export const Import: React.FC<Props> = ({ token }) => {
+export const Import = () => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Forms token={token} />
+        <Forms />
       </TooltipTrigger>
       <TooltipContent>
         <p>Importar</p>

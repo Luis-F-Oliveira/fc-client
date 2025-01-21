@@ -10,9 +10,9 @@ import { EditDialog } from './edit-dialog'
 
 import type { IServant } from '@/@types/data'
 
-async function getData(token: string | undefined): Promise<IServant[]> {
+async function getData(): Promise<IServant[]> {
   try {
-    const res = await api.get('/api/servants', { headers: { Authorization: `Bearer ${token}` } })
+    const res = await api.get('/api/servants')
     return res.data
   } catch (err: any) {
     const status = err.response?.status
@@ -21,13 +21,12 @@ async function getData(token: string | undefined): Promise<IServant[]> {
 }
 
 export default async function Page() {
-  const token = cookies().get('jwt')?.value
-  const data = await getData(token)
+  const data = await getData()
 
   return (
     <DataProvider>
-      <DataTable token={token} data={data} columns={columns} />
-      <EditDialog token={token} />
+      <DataTable data={data} columns={columns} />
+      <EditDialog />
     </DataProvider>
   )
 }

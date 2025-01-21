@@ -1,14 +1,11 @@
 import type { IReport } from "@/@types/data"
 import { DataTable } from "./data-table"
 import { columns } from "./columns"
-import { cookies } from "next/headers"
 import api from "@/lib/axios"
 
 async function getData(): Promise<IReport[]> {
-  const token = cookies().get('jwt')?.value
-
   try {
-    const res = await api.get('/api/reports', { headers: { Authorization: `Bearer ${token}` }})
+    const res = await api.get('/api/reports')
     return res.data
   } catch (err: any) {
     const { message } = err.response?.data

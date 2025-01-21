@@ -18,7 +18,7 @@ interface Props {
   token: string | undefined
 }
 
-export const Start: React.FC<Props> = ({ token }) => {
+export const Start = () => {
   const [ isActive, setIsActive ] = React.useState(false)
   const { active, setterData } = useScrapping()
   const { toast } = useToast()
@@ -27,9 +27,7 @@ export const Start: React.FC<Props> = ({ token }) => {
     setIsActive(true)
 
     try {
-      const response = await api.get('/api/servants', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const response = await api.get('/api/servants')
       const { data } = response
 
       setIsActive(false)

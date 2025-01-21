@@ -76,11 +76,7 @@ const schema = z.object({
 
 type IForm = z.infer<typeof schema>
 
-interface Props {
-  token: string | undefined
-}
-
-const Forms: React.FC<Props> = ({ token }) => {
+const Forms = () => {
   const { toast } = useToast()
   const form = useForm<IForm>({
     resolver: zodResolver(schema),
@@ -92,11 +88,7 @@ const Forms: React.FC<Props> = ({ token }) => {
   const { isSubmitting } = form.formState
 
   const onSubmit = async (values: IForm) => {
-    await api.post('/api/servants', values, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    await api.post('/api/servants', values)
       .then((res) => {
         const { message } = res.data
 
@@ -241,11 +233,11 @@ const Forms: React.FC<Props> = ({ token }) => {
   )
 }
 
-export const Create: React.FC<Props> = ({ token }) => {
+export const Create = () => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Forms token={token} />
+        <Forms />
       </TooltipTrigger>
       <TooltipContent>
         <p>Adicionar</p>

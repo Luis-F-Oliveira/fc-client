@@ -10,11 +10,7 @@ import {
 import { Edit } from './edit'
 import { useData } from '@/context/data-context'
 
-interface Props {
-  token: string | undefined
-}
-
-export const EditDialog: React.FC<Props> = ({ token }) => {
+export const EditDialog = () => {
   const { isOpen, setIsOpen, id } = useData()
 
   return (
@@ -23,7 +19,7 @@ export const EditDialog: React.FC<Props> = ({ token }) => {
         <DialogHeader>
           <DialogTitle>Atualizar</DialogTitle>
         </DialogHeader>
-        <Edit id={id} token={token} />
+        <Edit id={id} />
       </DialogContent>
     </Dialog>
   )

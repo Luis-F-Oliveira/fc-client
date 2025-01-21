@@ -6,9 +6,9 @@ import { columns } from "./columns"
 import { cookies } from "next/headers"
 import api from "@/lib/axios"
 
-async function getData(token: string | undefined): Promise<IData[]> {
+async function getData(): Promise<IData[]> {
   try {
-    const res = await api.get('/api/collected_data', { headers: { Authorization: `Bearer ${token}` }})
+    const res = await api.get('/api/collected_data')
     return res.data
   } catch (err: any) {
     const { message } = err.response?.data
@@ -18,8 +18,7 @@ async function getData(token: string | undefined): Promise<IData[]> {
 }
 
 export default async function Page() {
-  const token = cookies().get('jwt')?.value
-  const data = await getData(token)
+  const data = await getData()
   
-  return <DataTable data={data} columns={columns} token={token} />
+  return <DataTable data={data} columns={columns} />
 }

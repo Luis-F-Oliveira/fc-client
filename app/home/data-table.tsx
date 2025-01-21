@@ -49,13 +49,11 @@ import { DateSend } from "./date-send"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  token: string | undefined
 }
 
 export function DataTable<TData extends IData, TValue>({
   columns,
-  data,
-  token
+  data
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [selectedOption, setSelectedOption] = React.useState('servant_name')
@@ -66,11 +64,7 @@ export function DataTable<TData extends IData, TValue>({
 
   const handleSendEmail = () => {
     setIsSubmitting(true)
-    axios.post('/api/send_emails_by_ids', rowSelectionId, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    axios.post('/api/send_emails_by_ids', rowSelectionId)
       .then(() => setIsSubmitting(false))
       .catch(() => setIsSubmitting(false))
   }
@@ -147,7 +141,7 @@ export function DataTable<TData extends IData, TValue>({
                 <p>Enviar Email Selecionados</p>
               </TooltipContent>
             </Tooltip>
-            <DateSend token={token} />
+            <DateSend />
           </TooltipProvider>
         </div>
       </div>

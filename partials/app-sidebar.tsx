@@ -18,17 +18,17 @@ import {
   CollapsibleTrigger
 } from '@/components/ui/collapsible'
 import { CaretSortIcon } from "@radix-ui/react-icons"
-import { 
-  CalendarClock, 
-  ChevronRight, 
-  Cog, 
-  Home, 
-  Inbox, 
-  User, 
-  Users 
+import {
+  CalendarClock,
+  ChevronRight,
+  Cog,
+  FolderUp,
+  Home,
+  Inbox,
+  Users
 } from "lucide-react"
 import Link from "next/link"
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -42,7 +42,7 @@ import { ModeToggle } from "@/components/ui/toggle-theme"
 export const AppSidebar = () => {
   const handleLogout = async () => {
     await logout()
-  } 
+  }
 
   return (
     <Sidebar variant='floating' collapsible='icon'>
@@ -52,7 +52,7 @@ export const AppSidebar = () => {
           <SidebarGroup>
             <SidebarGroupLabel asChild>
               <CollapsibleTrigger>
-                Público
+                Dados
                 <CaretSortIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
               </CollapsibleTrigger>
             </SidebarGroupLabel>
@@ -61,7 +61,7 @@ export const AppSidebar = () => {
                 <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link href='/public/home'>
+                      <Link href='/home'>
                         <Home />
                         <span>Principal</span>
                       </Link>
@@ -69,9 +69,17 @@ export const AppSidebar = () => {
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link href='/public/report'>
+                      <Link href='/report'>
                         <Inbox />
                         <span>Relatório</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link href='/export'>
+                        <FolderUp />
+                        <span>Exportar</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -96,14 +104,6 @@ export const AppSidebar = () => {
                       <Link href='/admin/data'>
                         <Users />
                         <span>Servidores</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href='/admin/users'>
-                        <User />
-                        <span>Usuários</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -155,9 +155,6 @@ export const AppSidebar = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <ModeToggle />
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
-                  <span>Deslogar</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

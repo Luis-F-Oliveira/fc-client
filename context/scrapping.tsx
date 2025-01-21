@@ -19,7 +19,7 @@ interface ContextProps {
   isSubmitting: boolean
   active: () => void
   setterData: (data: IData[]) => void
-  storeData: (token: string | undefined) => void
+  storeData: () => void
 }
 
 interface ProviderProps {
@@ -88,13 +88,9 @@ export const ScrappingProvider: React.FC<ProviderProps> = ({ children }) => {
     refresh()
   }
 
-  const storeData = (token: string | undefined) => {
+  const storeData = () => {
     setIsSubmitting(true)
-    api.post('/api/collected_data', data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    api.post('/api/collected_data', data)
       .then((res) => {
         const { message } = res.data
         setIsSubmitting(false)
